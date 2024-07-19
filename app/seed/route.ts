@@ -121,18 +121,3 @@ export async function GET() {
   }
 }
 
-export async function local() {
-  try {
-    await client.sql`BEGIN`;
-    await seedUsers();
-    await seedCustomers();
-    await seedInvoices();
-    await seedRevenue();
-    await client.sql`COMMIT`;
-    console.log('done')
-  } catch (error) {
-    await client.sql`ROLLBACK`;
-    console.error(error)
-  }
-}
-local()
